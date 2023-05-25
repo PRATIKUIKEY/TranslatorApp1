@@ -1,0 +1,28 @@
+!pip install googletrans==4.0.0-rc1
+
+from googletrans import Translator
+
+# Function to translate text
+def translate_text(text, source_lang, target_lang):
+    translator = Translator(service_urls=['translate.google.com'])
+    
+    # Detect the source language if not provided
+    if source_lang is None:
+        detected_lang = translator.detect(text)
+        source_lang = detected_lang.lang
+    
+    # Translate the text
+    translated = translator.translate(text, src=source_lang, dest=target_lang)
+    
+    return translated.text
+
+# Example usage
+text = "Hello, how are you?"
+source_lang = 'en'
+target_lang = 'fr'
+
+# Translate the text
+translation = translate_text(text, source_lang, target_lang)
+
+# Print the translation
+print(f"Translation: {translation}")
